@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The 4 Levels of Automation — Free Breakdown</title>
+  <meta name="description" content="A free breakdown of the 4 levels of automation — where you are right now, which tools to use, and where to start. By Allen Enriquez.">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --blue: #02B3E9;
+      --orange: #FFA425;
+      --bg: #0C0E14;
+      --surface: #141720;
+      --border: rgba(255,255,255,0.07);
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--bg);
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+
+    .wrap {
+      width: 100%;
+      max-width: 560px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+    }
+
+    /* ── HANDLE ── */
+    .handle {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 24px;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .free-badge {
+      display: inline-block;
+      font-size: 9.5px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--orange);
+      border: 1px solid rgba(255,164,37,0.3);
+      border-radius: 20px;
+      padding: 4px 12px;
+      margin-bottom: 16px;
+    }
+
+    .hero h1 {
+      font-size: clamp(28px, 6vw, 42px);
+      font-weight: 900;
+      letter-spacing: -1.5px;
+      line-height: 1.05;
+      margin-bottom: 14px;
+    }
+
+    .hero h1 span { color: var(--blue); }
+
+    .hero p {
+      font-size: 15px;
+      line-height: 1.6;
+      color: rgba(255,255,255,0.5);
+      max-width: 420px;
+      margin: 0 auto;
+    }
+
+    /* ── CARD ── */
+    .card {
+      width: 100%;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px;
+      margin-bottom: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--blue), var(--orange));
+      border-radius: 16px 16px 0 0;
+    }
+
+    .card-label {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 14px;
+    }
+
+    .inside-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .inside-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 13.5px;
+      line-height: 1.5;
+      color: rgba(255,255,255,0.65);
+    }
+
+    .inside-list li strong {
+      color: rgba(255,255,255,0.9);
+      font-weight: 600;
+    }
+
+    .check {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: rgba(2,179,233,0.12);
+      border: 1px solid rgba(2,179,233,0.25);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 2px;
+    }
+
+    .check svg {
+      width: 9px;
+      height: 9px;
+    }
+
+    /* ── LEVELS PREVIEW ── */
+    .levels-preview {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .lp {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 14px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .lp::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 2px;
+      border-radius: 10px 10px 0 0;
+      background: var(--lc);
+    }
+
+    .lp.l1 { --lc: #02B3E9; }
+    .lp.l2 { --lc: #4FC3F7; }
+    .lp.l3 { --lc: #FFA425; }
+    .lp.l4 { --lc: #FF6B6B; }
+
+    .lp-num {
+      font-size: 8px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--lc);
+      margin-bottom: 2px;
+    }
+
+    .lp-name {
+      font-size: 12.5px;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+
+    .lp-desc {
+      font-size: 10px;
+      line-height: 1.45;
+      color: rgba(255,255,255,0.42);
+    }
+
+    /* ── DOWNLOAD BTN ── */
+    .dl-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      padding: 17px 24px;
+      background: var(--blue);
+      color: #fff;
+      font-family: inherit;
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: -0.2px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: opacity 0.15s, transform 0.15s;
+      margin-bottom: 12px;
+    }
+
+    .dl-btn:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
+    }
+
+    .dl-btn:active {
+      transform: translateY(0);
+    }
+
+    .dl-btn svg {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+    }
+
+    .dl-sub {
+      text-align: center;
+      font-size: 11px;
+      color: rgba(255,255,255,0.25);
+      margin-bottom: 32px;
+    }
+
+    /* ── FOOTER ── */
+    .footer {
+      text-align: center;
+    }
+
+    .footer p {
+      font-size: 11px;
+      color: rgba(255,255,255,0.25);
+      margin-bottom: 6px;
+    }
+
+    .footer .ig {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--blue);
+      text-decoration: none;
+    }
+
+    .footer .ig:hover { opacity: 0.8; }
+  </style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="handle">@allenenriquezz</div>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="free-badge">Free Breakdown</div>
+    <h1>The <span>4 Levels</span><br>of Automation</h1>
+    <p>Where you are right now changes what you should build next. This is the full map — no fluff, real examples, plain English.</p>
+  </div>
+
+  <!-- WHAT'S INSIDE -->
+  <div class="card">
+    <div class="card-label">What's Inside</div>
+    <ul class="inside-list">
+      <li>
+        <div class="check">
+          <svg viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2 5.5L4 7.5L8 3" stroke="#02B3E9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <span><strong>Why this matters right now</strong> — what's actually happening to professionals and businesses that aren't using automation yet</span>
+      </li>
+      <li>
+        <div class="check">
+          <svg viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2 5.5L4 7.5L8 3" stroke="#02B3E9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <span><strong>All 4 levels explained in plain English</strong> — with analogies, real examples, tool recommendations, and what you actually gain at each level</span>
+      </li>
+      <li>
+        <div class="check">
+          <svg viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2 5.5L4 7.5L8 3" stroke="#02B3E9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <span><strong>The 3-question formula</strong> for finding your first automation — the exact process I used to go from 45-minute proposals to under 5 minutes</span>
+      </li>
+      <li>
+        <div class="check">
+          <svg viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2 5.5L4 7.5L8 3" stroke="#02B3E9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <span><strong>Where to start based on your level</strong> — whether you've never touched automation or you're already using n8n</span>
+      </li>
+    </ul>
+  </div>
+
+  <!-- LEVELS PREVIEW -->
+  <div class="levels-preview">
+    <div class="lp l1">
+      <div class="lp-num">Level 1</div>
+      <div class="lp-name">Basic Triggers</div>
+      <div class="lp-desc">One trigger, one action. Like an alarm clock — set it once, it runs forever.</div>
+    </div>
+    <div class="lp l2">
+      <div class="lp-num">Level 2</div>
+      <div class="lp-name">Multi-Step Workflows</div>
+      <div class="lp-desc">A checklist that runs itself. Multiple steps, different paths, no human needed.</div>
+    </div>
+    <div class="lp l3">
+      <div class="lp-num">Level 3</div>
+      <div class="lp-name">AI-Enhanced</div>
+      <div class="lp-desc">Same steps, but one of them uses AI to write the smart parts for you.</div>
+    </div>
+    <div class="lp l4">
+      <div class="lp-num">Level 4</div>
+      <div class="lp-name">Agentic Workflows</div>
+      <div class="lp-desc">No preset steps. AI reads the situation and decides what to do next.</div>
+    </div>
+  </div>
+
+  <!-- DOWNLOAD -->
+  <a href="breakdown.pdf" download="4-Levels-of-Automation-Allen-Enriquez.pdf" class="dl-btn">
+    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 3v13m0 0l-4-4m4 4l4-4M5 21h14" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    Download Free Breakdown (PDF)
+  </a>
+  <div class="dl-sub">3 pages · No email required · Yours to keep</div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <p>More breakdowns like this every week.</p>
+    <a href="https://instagram.com/allenenriquezz" target="_blank" class="ig">@allenenriquezz on Instagram</a>
+  </div>
+
+</div>
+</body>
+</html>
