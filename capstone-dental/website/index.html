@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Capstone Dental Clinic — Trusted dental care in Baguio City</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --blue: #2563EB;
+      --blue-dark: #1D4ED8;
+      --navy: #080D1C;
+      --glass: rgba(255,255,255,0.055);
+      --glass-border: rgba(255,255,255,0.11);
+      --text: #F1F5F9;
+      --muted: rgba(241,245,249,0.55);
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'DM Sans', system-ui, sans-serif;
+      background: var(--navy);
+      color: var(--text);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    .tc { text-align: center; }
+
+    /* ── ANIMATED BG ORBS ── */
+    .bg-mesh { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+    .orb {
+      position: absolute; border-radius: 50%;
+      filter: blur(90px); opacity: 0.22;
+      animation: drift 22s ease-in-out infinite;
+    }
+    .o1 { width: 650px; height: 650px; background: #1E3A8A; top: -220px; left: -120px; animation-delay: 0s; }
+    .o2 { width: 520px; height: 520px; background: #1D4ED8; top: 45%; right: -160px; animation-delay: -8s; }
+    .o3 { width: 420px; height: 420px; background: #0284C7; bottom: -80px; left: 35%; animation-delay: -16s; }
+    @keyframes drift {
+      0%,100% { transform: translate(0,0) scale(1); }
+      33% { transform: translate(28px,-44px) scale(1.06); }
+      66% { transform: translate(-22px,32px) scale(0.94); }
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 200;
+      padding: 14px 0;
+      background: rgba(8,13,28,0.72);
+      backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .nav-inner {
+      max-width: 1180px; margin: 0 auto; padding: 0 24px;
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    }
+    .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+    .nav-logo img {
+      height: 42px; width: 42px; border-radius: 50%;
+      object-fit: contain; background: rgba(255,255,255,0.1); padding: 4px;
+    }
+    .nav-logo span { font-weight: 800; font-size: 15px; color: #fff; }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a {
+      text-decoration: none; font-size: 14px; font-weight: 500;
+      color: var(--muted); transition: color .2s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: #fff; }
+    .btn-nav {
+      padding: 10px 22px; border-radius: 10px; background: var(--blue);
+      color: #fff; font-weight: 700; font-size: 14px; text-decoration: none;
+      transition: background .2s, transform .15s;
+    }
+    .btn-nav:hover { background: var(--blue-dark); transform: translateY(-1px); }
+    .hamburger {
+      display: none; background: none; border: none; color: #fff;
+      cursor: pointer; padding: 6px;
+    }
+    .nav-mobile {
+      display: none; flex-direction: column; gap: 14px;
+      padding: 18px 24px; border-top: 1px solid rgba(255,255,255,0.07);
+    }
+    .nav-mobile.open { display: flex; }
+    .nav-mobile a {
+      text-decoration: none; font-size: 15px; font-weight: 500; color: var(--muted);
+    }
+    .nav-mobile .btn-mob {
+      margin-top: 4px; background: var(--blue); color: #fff;
+      padding: 13px 20px; border-radius: 10px; font-weight: 700; text-align: center;
+    }
+    @media(max-width:768px){
+      .nav-links,.btn-nav { display: none; }
+      .hamburger { display: flex; }
+    }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative; z-index: 1;
+      min-height: 94vh; display: flex; align-items: center;
+      padding: 80px 24px;
+    }
+    .hero-inner {
+      max-width: 1180px; margin: 0 auto; width: 100%;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 7px 18px; border-radius: 100px; font-size: 13px; font-weight: 600;
+      background: rgba(37,99,235,0.14); border: 1px solid rgba(37,99,235,0.38);
+      color: #93C5FD; margin-bottom: 28px;
+    }
+    .hero-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(2.8rem, 5.5vw, 5.2rem);
+      font-weight: 900; line-height: 1.06; letter-spacing: -0.025em;
+      color: #fff; margin-bottom: 22px;
+    }
+    .hero-title .grad {
+      background: linear-gradient(135deg, #93C5FD 0%, #2563EB 60%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .hero-sub {
+      font-size: 17px; line-height: 1.72; color: var(--muted);
+      max-width: 460px; margin-bottom: 40px;
+    }
+    .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 15px 34px; border-radius: 13px; background: var(--blue); color: #fff;
+      font-weight: 700; font-size: 16px; text-decoration: none;
+      box-shadow: 0 8px 32px rgba(37,99,235,0.45);
+      transition: all .2s; position: relative; overflow: hidden;
+    }
+    .btn-primary::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.14), transparent 60%);
+      pointer-events: none;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 14px 44px rgba(37,99,235,0.6); }
+    .btn-ghost {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 15px 34px; border-radius: 13px; background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.14); color: #fff; font-weight: 600;
+      font-size: 16px; text-decoration: none; transition: all .2s;
+    }
+    .btn-ghost:hover { background: rgba(255,255,255,0.11); transform: translateY(-2px); }
+
+    /* ── 3D TOOTH SCENE ── */
+    .tooth-scene {
+      position: relative; display: flex; align-items: center; justify-content: center;
+      min-height: 500px;
+    }
+    .tooth-glow {
+      position: absolute; width: 320px; height: 320px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(37,99,235,0.52) 0%, transparent 70%);
+      filter: blur(48px);
+      animation: glow-pulse 3.5s ease-in-out infinite;
+    }
+    @keyframes glow-pulse {
+      0%,100% { opacity: .5; transform: scale(1); }
+      50% { opacity: .85; transform: scale(1.12); }
+    }
+    .tooth-wrap {
+      position: relative; z-index: 2;
+      animation: tooth-float 7s ease-in-out infinite;
+      filter:
+        drop-shadow(0 0 40px rgba(37,99,235,0.55))
+        drop-shadow(0 30px 60px rgba(8,13,28,0.8))
+        drop-shadow(0 -6px 20px rgba(147,197,253,0.2));
+    }
+    @keyframes tooth-float {
+      0%,100% { transform: translateY(0) rotateY(0deg) rotateZ(0deg); }
+      20% { transform: translateY(-18px) rotateY(7deg) rotateZ(1deg); }
+      50% { transform: translateY(-28px) rotateY(-4deg) rotateZ(-0.5deg); }
+      75% { transform: translateY(-12px) rotateY(3deg) rotateZ(0.8deg); }
+    }
+    .tooth-svg { width: 240px; height: 300px; }
+
+    /* floating info badges */
+    .fbadge {
+      position: absolute; display: flex; align-items: center; gap: 8px;
+      padding: 10px 16px; border-radius: 12px; font-size: 13px; font-weight: 600;
+      white-space: nowrap; z-index: 3;
+      animation: badge-float 9s ease-in-out infinite;
+    }
+    .fb1 {
+      top: 18%; left: -8px;
+      background: rgba(16,185,129,0.14); border: 1px solid rgba(16,185,129,0.32);
+      color: #6EE7B7; animation-delay: -2s;
+    }
+    .fb2 {
+      top: 44%; right: -12px;
+      background: rgba(245,158,11,0.14); border: 1px solid rgba(245,158,11,0.32);
+      color: #FCD34D; animation-delay: -5s;
+    }
+    .fb3 {
+      bottom: 24%; left: 4%;
+      background: rgba(37,99,235,0.18); border: 1px solid rgba(37,99,235,0.38);
+      color: #93C5FD; animation-delay: -1s;
+    }
+    @keyframes badge-float {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-14px); }
+    }
+
+    /* ── STATS BAR ── */
+    .stats-bar {
+      position: relative; z-index: 1;
+      background: rgba(255,255,255,0.035);
+      border-top: 1px solid rgba(255,255,255,0.07);
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .stats-inner {
+      max-width: 860px; margin: 0 auto; padding: 36px 24px;
+      display: grid; grid-template-columns: repeat(3,1fr); gap: 16px;
+    }
+    .stat { text-align: center; padding: 0 20px; }
+    .stat:not(:last-child) { border-right: 1px solid rgba(255,255,255,0.08); }
+    .stat-num {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(2.2rem, 4.5vw, 3.4rem); font-weight: 900;
+      background: linear-gradient(135deg, #fff 30%, #93C5FD);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      line-height: 1; margin-bottom: 6px;
+    }
+    .stat-lbl { font-size: 14px; color: var(--muted); font-weight: 500; }
+
+    /* ── SHARED SECTION STYLES ── */
+    .section { position: relative; z-index: 1; padding: 96px 24px; }
+    .section-inner { max-width: 1180px; margin: 0 auto; }
+    .slabel {
+      display: inline-block; font-size: 11px; font-weight: 700;
+      letter-spacing: .14em; text-transform: uppercase; color: #60A5FA;
+      margin-bottom: 14px;
+    }
+    .stitle {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 900;
+      line-height: 1.1; letter-spacing: -0.02em; color: #fff; margin-bottom: 18px;
+    }
+    .ssub {
+      font-size: 17px; color: var(--muted); max-width: 520px; line-height: 1.72;
+      margin: 0 auto;
+    }
+
+    /* ── 3D SERVICE CARDS ── */
+    .services-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(340px,1fr));
+      gap: 18px; margin-top: 60px;
+    }
+    .scard {
+      position: relative; border-radius: 20px; padding: 30px;
+      background: var(--glass); border: 1px solid var(--glass-border);
+      overflow: hidden; cursor: default;
+      transform-style: preserve-3d; will-change: transform;
+      transition: box-shadow .3s, border-color .3s;
+    }
+    .scard::before {
+      content: ''; position: absolute; inset: 0; border-radius: inherit;
+      background: linear-gradient(135deg, rgba(37,99,235,0.1), transparent 55%);
+      opacity: 0; transition: opacity .3s; pointer-events: none;
+    }
+    .scard:hover::before { opacity: 1; }
+    .scard:hover { border-color: rgba(37,99,235,0.35); box-shadow: 0 22px 64px rgba(0,0,0,0.45); }
+    .scard-shine {
+      position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
+      opacity: 0; transition: opacity .25s;
+    }
+    .scard-icon {
+      width: 52px; height: 52px; border-radius: 13px; margin-bottom: 20px;
+      display: flex; align-items: center; justify-content: center;
+      background: linear-gradient(135deg, rgba(37,99,235,0.28), rgba(37,99,235,0.1));
+      border: 1px solid rgba(37,99,235,0.28);
+    }
+    .scard-icon svg { width: 24px; height: 24px; stroke: #93C5FD; }
+    .scard h3 { font-size: 17px; font-weight: 700; color: #fff; margin-bottom: 9px; }
+    .scard p { font-size: 14px; color: var(--muted); line-height: 1.65; margin-bottom: 18px; }
+    .clink {
+      font-size: 13px; font-weight: 700; color: #60A5FA; text-decoration: none;
+      display: inline-flex; align-items: center; gap: 5px; transition: gap .2s;
+    }
+    .clink:hover { gap: 9px; }
+
+    /* ── WHY US ── */
+    .why-bg {
+      background: rgba(255,255,255,0.025);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .why-grid {
+      display: grid; grid-template-columns: repeat(3,1fr); gap: 32px; margin-top: 60px;
+    }
+    .why-item {
+      text-align: center; padding: 36px 24px; border-radius: 20px;
+      border: 1px solid transparent; transition: all .3s;
+    }
+    .why-item:hover {
+      background: rgba(37,99,235,0.08); border-color: rgba(37,99,235,0.22);
+      transform: translateY(-8px);
+    }
+    .why-icon {
+      width: 68px; height: 68px; border-radius: 18px; margin: 0 auto 22px;
+      display: flex; align-items: center; justify-content: center;
+      background: linear-gradient(135deg, var(--blue), var(--blue-dark));
+      box-shadow: 0 8px 32px rgba(37,99,235,0.42);
+    }
+    .why-icon svg { width: 32px; height: 32px; stroke: #fff; }
+    .why-item h3 { font-size: 19px; font-weight: 700; color: #fff; margin-bottom: 12px; }
+    .why-item p { font-size: 14px; color: var(--muted); line-height: 1.65; }
+
+    /* ── TESTIMONIALS ── */
+    .tgrid {
+      display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; margin-top: 60px;
+    }
+    .tcard {
+      border-radius: 20px; padding: 30px;
+      background: var(--glass); border: 1px solid var(--glass-border);
+      position: relative; overflow: hidden; transition: all .3s;
+    }
+    .tcard::before {
+      content: '"'; position: absolute; top: -14px; left: 18px;
+      font-size: 110px; font-family: Georgia, serif;
+      color: rgba(37,99,235,0.14); line-height: 1; pointer-events: none;
+    }
+    .tcard:hover {
+      background: rgba(37,99,235,0.07); border-color: rgba(37,99,235,0.22);
+      transform: translateY(-6px);
+    }
+    .tstars { color: #FCD34D; font-size: 17px; letter-spacing: 2px; margin-bottom: 14px; }
+    .ttext {
+      font-size: 14px; color: var(--muted); line-height: 1.72;
+      margin-bottom: 18px; font-style: italic;
+    }
+    .tauthor { font-weight: 700; color: #fff; font-size: 14px; }
+    .tloc { font-size: 12px; color: rgba(241,245,249,0.35); margin-top: 2px; }
+
+    /* ── CTA ── */
+    .cta-wrap {
+      position: relative; z-index: 1; padding: 100px 24px; text-align: center; overflow: hidden;
+    }
+    .cta-bg-grad {
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, #1E3A8A 0%, #2563EB 55%, #1D4ED8 100%);
+    }
+    .cta-orb {
+      position: absolute; border-radius: 50%;
+      background: rgba(255,255,255,0.07); filter: blur(60px);
+    }
+    .co1 { width: 420px; height: 420px; top: -100px; left: -80px; }
+    .co2 { width: 300px; height: 300px; bottom: -60px; right: -60px; }
+    .cta-content { position: relative; z-index: 2; max-width: 620px; margin: 0 auto; }
+    .cta-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(2rem, 4.5vw, 3.4rem); font-weight: 900;
+      color: #fff; line-height: 1.12; letter-spacing: -0.02em; margin-bottom: 18px;
+    }
+    .cta-sub { font-size: 17px; color: rgba(255,255,255,0.72); line-height: 1.65; margin-bottom: 42px; }
+    .btn-cta {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 18px 46px; border-radius: 14px; background: #fff;
+      color: var(--blue); font-weight: 800; font-size: 17px; text-decoration: none;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.3); transition: all .2s;
+    }
+    .btn-cta:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 16px 60px rgba(0,0,0,0.42); }
+    .btn-cta:active { transform: scale(.98); }
+
+    /* ── FOOTER ── */
+    footer {
+      position: relative; z-index: 1; background: #040710;
+      padding: 64px 24px 28px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .footer-inner {
+      max-width: 1180px; margin: 0 auto;
+      display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 48px; margin-bottom: 48px;
+    }
+    .fbrand img {
+      height: 46px; width: 46px; border-radius: 50%;
+      object-fit: contain; background: rgba(255,255,255,0.08); padding: 4px; margin-bottom: 14px;
+    }
+    .fbrand-name { font-weight: 800; font-size: 15px; color: #fff; margin-bottom: 10px; }
+    .fbrand p { font-size: 13px; color: rgba(255,255,255,0.35); line-height: 1.65; }
+    .fcol h4 {
+      font-size: 12px; font-weight: 700; color: #fff; margin-bottom: 18px;
+      letter-spacing: .1em; text-transform: uppercase;
+    }
+    .fcol p, .fcol a {
+      display: block; font-size: 13px; color: rgba(255,255,255,0.38);
+      text-decoration: none; line-height: 1.5; margin-bottom: 9px; transition: color .2s;
+    }
+    .fcol a:hover { color: rgba(255,255,255,0.75); }
+    .footer-bottom {
+      max-width: 1180px; margin: 0 auto; padding-top: 22px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 10px;
+    }
+    .footer-bottom span { font-size: 12px; color: rgba(255,255,255,0.22); }
+    .credit { color: #60A5FA !important; font-weight: 600; }
+
+    /* ── SWITCHER ── */
+    .switcher {
+      position: relative; z-index: 1; text-align: center; padding: 12px;
+      font-size: 12px; color: rgba(255,255,255,0.3);
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+    .switcher strong { color: rgba(255,255,255,0.55); }
+    .switcher a { color: #60A5FA; text-decoration: underline; }
+
+    /* ── SCROLL REVEAL ── */
+    .r { opacity: 0; transform: translateY(28px); transition: opacity .65s ease, transform .65s ease; }
+    .r.v { opacity: 1; transform: translateY(0); }
+    .d1 { transition-delay: .08s; }
+    .d2 { transition-delay: .16s; }
+    .d3 { transition-delay: .25s; }
+    .d4 { transition-delay: .34s; }
+    .d5 { transition-delay: .43s; }
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:1024px){
+      .hero-inner { grid-template-columns: 1fr; text-align: center; }
+      .hero-sub, .hero-ctas { margin-left: auto; margin-right: auto; }
+      .hero-ctas { justify-content: center; }
+      .tooth-scene { min-height: 380px; order: -1; }
+      .why-grid { grid-template-columns: 1fr; gap: 16px; }
+      .tgrid { grid-template-columns: 1fr; }
+      .footer-inner { grid-template-columns: 1fr 1fr; }
+      .ssub { margin: 0 auto; }
+    }
+    @media(max-width:640px){
+      .services-grid { grid-template-columns: 1fr; }
+      .stats-inner { grid-template-columns: 1fr; }
+      .stat:not(:last-child) { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.07); padding-bottom: 20px; margin-bottom: 4px; }
+      .footer-inner { grid-template-columns: 1fr; }
+      .tooth-scene { min-height: 300px; }
+      .tooth-svg { width: 190px; height: 240px; }
+      .fb1, .fb2, .fb3 { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Animated background -->
+<div class="bg-mesh" aria-hidden="true">
+  <div class="orb o1"></div>
+  <div class="orb o2"></div>
+  <div class="orb o3"></div>
+</div>
+
+<!-- Nav -->
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <img src="../logo.jpg" alt="Capstone Dental Clinic" onerror="this.style.display='none'">
+      <span>Capstone Dental Clinic</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <a href="book.html" class="btn-nav">Book Now</a>
+    <button id="nav-toggle" class="hamburger" aria-label="Open menu">
+      <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+      </svg>
+    </button>
+  </div>
+  <div class="nav-mobile" id="nav-mobile">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="services.html">Services</a>
+    <a href="contact.html">Contact</a>
+    <a href="book.html" class="btn-mob">Book Appointment</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-inner">
+    <!-- Left: copy -->
+    <div>
+      <div class="hero-badge r">⭐⭐⭐⭐⭐ &nbsp;5.0 on Google · Trusted by local patients</div>
+      <h1 class="hero-title r d1">Your smile is<br>in <span class="grad">good hands.</span></h1>
+      <p class="hero-sub r d2">Modern dental care for the whole family — general, cosmetic, and orthodontic treatments right here in Baguio City.</p>
+      <div class="hero-ctas r d3">
+        <a href="book.html" class="btn-primary">
+          Book an Appointment
+          <svg width="17" height="17" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+          </svg>
+        </a>
+        <a href="services.html" class="btn-ghost">Our Services</a>
+      </div>
+    </div>
+
+    <!-- Right: 3D tooth -->
+    <div class="tooth-scene r d2">
+      <div class="tooth-glow"></div>
+      <div class="fbadge fb1">✓ Pain-free treatment</div>
+      <div class="fbadge fb2">📅 Book anytime online</div>
+      <div class="fbadge fb3">🛡️ PRC licensed dentists</div>
+      <div class="tooth-wrap">
+        <svg class="tooth-svg" viewBox="0 0 200 270" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Ground shadow -->
+          <ellipse cx="102" cy="208" rx="54" ry="28" fill="url(#shad)" opacity="0.55"/>
+          <!-- Roots -->
+          <path d="M66 158 C61 173 57 195 59 216 C60 229 65 241 72 241 C80 241 83 228 83 209 L81 161Z" fill="url(#root)"/>
+          <path d="M87 161 C85 180 84 200 86 221 C87 234 93 246 100 246 C107 246 113 234 114 221 C116 200 115 180 113 161Z" fill="url(#root)"/>
+          <path d="M117 161 L119 209 C119 228 122 241 130 241 C137 241 142 229 143 216 C145 195 141 173 136 158Z" fill="url(#root)"/>
+          <!-- Crown -->
+          <path d="M46 78 C40 52 48 24 61 18 C70 13 79 18 85 27 C91 36 100 40 100 40 C100 40 109 36 115 27 C121 18 130 13 139 18 C152 24 160 52 154 78 C150 99 150 130 150 148 C150 162 141 168 120 168 L80 168 C59 168 50 162 50 148 C50 130 50 99 46 78Z" fill="url(#crown)"/>
+          <!-- Cusps -->
+          <path d="M58 68 C53 57 50 40 59 34 C65 30 71 33 74 42 C77 51 78 62 78 72Z" fill="url(#cusp)"/>
+          <path d="M84 60 C82 49 83 33 90 27 C95 23 100 23 100 23 C100 23 105 23 110 27 C117 33 118 49 116 60Z" fill="url(#cusp)"/>
+          <path d="M122 72 C122 62 123 51 126 42 C129 33 135 30 141 34 C150 40 147 57 142 68Z" fill="url(#cusp)"/>
+          <!-- Shine highlights -->
+          <ellipse cx="79" cy="93" rx="11" ry="23" fill="rgba(255,255,255,0.22)" transform="rotate(-16 79 93)"/>
+          <ellipse cx="71" cy="57" rx="5" ry="9" fill="rgba(255,255,255,0.3)" transform="rotate(-12 71 57)"/>
+          <!-- Subtle grooves -->
+          <path d="M66 102 Q100 113 134 102" stroke="rgba(255,255,255,0.08)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+          <path d="M63 118 Q100 130 137 118" stroke="rgba(255,255,255,0.055)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+          <defs>
+            <linearGradient id="crown" x1="46" y1="14" x2="160" y2="170" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#EAF4FF"/>
+              <stop offset="45%" stop-color="#D4E9F9"/>
+              <stop offset="100%" stop-color="#A9CDF0"/>
+            </linearGradient>
+            <linearGradient id="cusp" x1="0" y1="0" x2="0" y2="1" gradientUnits="objectBoundingBox">
+              <stop offset="0%" stop-color="#F0F8FF"/>
+              <stop offset="100%" stop-color="#C8DDF6"/>
+            </linearGradient>
+            <linearGradient id="root" x1="0" y1="0" x2="0" y2="1" gradientUnits="objectBoundingBox">
+              <stop offset="0%" stop-color="#BEDBF0"/>
+              <stop offset="100%" stop-color="#90BEE2"/>
+            </linearGradient>
+            <radialGradient id="shad" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#1E40AF" stop-opacity=".65"/>
+              <stop offset="100%" stop-color="#1E40AF" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Stats bar -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat r">
+      <div class="stat-num" data-target="15" data-suffix="+">0+</div>
+      <div class="stat-lbl">Years of trusted care</div>
+    </div>
+    <div class="stat r d2">
+      <div class="stat-num">5.0★</div>
+      <div class="stat-lbl">Google rating</div>
+    </div>
+    <div class="stat r d4">
+      <div class="stat-num" data-target="2000" data-suffix="+">0+</div>
+      <div class="stat-lbl">Happy patients</div>
+    </div>
+  </div>
+</div>
+
+<!-- Services -->
+<section class="section">
+  <div class="section-inner">
+    <div class="tc">
+      <div class="slabel r">What we offer</div>
+      <h2 class="stitle r d1">Comprehensive<br>dental care</h2>
+      <p class="ssub r d2">From routine check-ups to full smile makeovers — all under one roof in Baguio City.</p>
+    </div>
+    <div class="services-grid">
+      <div class="scard r" data-tilt>
+        <div class="scard-shine"></div>
+        <div class="scard-icon">
+          <svg fill="none" viewBox="0 0 24 24" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        </div>
+        <h3>General Dentistry</h3>
+        <p>Check-ups, X-rays, fillings, and extractions to keep your teeth healthy for the long term.</p>
+        <a href="services.html" class="clink">Learn more <span>→</span></a>
+      </div>
+      <div class="scard r d1" data-tilt>
+        <div class="scard-shine"></div>
+        <div class="scard-icon">
+          <svg fill="none" viewBox="0 0 24 24" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
+        </div>
+        <h3>Teeth Whitening</h3>
+        <p>Professional-grade whitening that delivers visible results in a single visit. Fast and safe.</p>
+        <a href="services.html" class="clink">Learn more <span>→</span></a>
+      </div>
+      <div class="scard r d2" data-tilt>
+        <div class="scard-shine"></div>
+        <div class="scard-icon">
+          <svg fill="none" viewBox="0 0 24 24" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+        </div>
+        <h3>Cosmetic Dentistry</h3>
+        <p>Veneers, bonding, and smile design — subtle refinement or full transformation, your choice.</p>
+        <a href="services.html" class="clink">Learn more <span>→</span></a>
+      </div>
+      <div class="scard r d1" data-tilt>
+        <div class="scard-shine"></div>
+        <div class="scard-icon">
+          <svg fill="none" viewBox="0 0 24 24" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
+        </div>
+        <h3>Orthodontics / Braces</h3>
+        <p>Traditional braces and clear aligners — straighten at your own pace and budget.</p>
+        <a href="services.html" class="clink">Learn more <span>→</span></a>
+      </div>
+      <div class="scard r d2" data-tilt>
+        <div class="scard-shine"></div>
+        <div class="scard-icon">
+          <svg fill="none" viewBox="0 0 24 24" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        </div>
+        <h3>Dental Implants</h3>
+        <p>Permanent tooth replacement that looks, feels, and functions exactly like your natural teeth.</p>
+        <a href="services.html" class="clink">Learn more <span>→</span></a>
+      </div>
+      <div class="scard r d3" data-tilt>
+        <div class="scard-shine"></div>
+        <div class="scard-icon">
+          <svg fill="none" viewBox="0 0 24 24" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+        </div>
+        <h3>Family &amp; Pediatric</h3>
+        <p>Kid-friendly care that builds healthy habits early. A dentist your whole family will love.</p>
+        <a href="services.html" class="clink">Learn more <span>→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Why us -->
+<section class="section why-bg">
+  <div class="section-inner">
+    <div class="tc">
+      <div class="slabel r">Why patients choose us</div>
+      <h2 class="stitle r d1">Dentistry done right</h2>
+    </div>
+    <div class="why-grid">
+      <div class="why-item r">
+        <div class="why-icon">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+        </div>
+        <h3>Licensed &amp; Experienced</h3>
+        <p>PRC-licensed dentists with 15+ years of experience. Your teeth are in expert hands.</p>
+      </div>
+      <div class="why-item r d2">
+        <div class="why-icon">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+        </div>
+        <h3>Modern Equipment</h3>
+        <p>Digital X-rays, sterilized instruments, and up-to-date technology for faster, safer, pain-free care.</p>
+      </div>
+      <div class="why-item r d4">
+        <div class="why-icon">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+        </div>
+        <h3>Book Online Anytime</h3>
+        <p>No phone calls needed. Pick your slot, confirm instantly, get an automatic reminder before your visit.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section class="section">
+  <div class="section-inner">
+    <div class="tc">
+      <div class="slabel r">Patient reviews</div>
+      <h2 class="stitle r d1">Real people.<br>Real smiles.</h2>
+      <div class="r d2" style="margin-top:14px">
+        <span style="color:#FCD34D;font-size:19px">★★★★★</span>
+        <span style="font-size:14px;color:var(--muted);margin-left:8px">5.0 on Google · Perfect rating</span>
+      </div>
+    </div>
+    <div class="tgrid">
+      <div class="tcard r">
+        <div class="tstars">★★★★★</div>
+        <p class="ttext">"Very professional and gentle. I used to be scared of the dentist but their team made me feel completely at ease. Highly recommend!"</p>
+        <p class="tauthor">Maria C.</p>
+        <p class="tloc">Baguio City</p>
+      </div>
+      <div class="tcard r d2">
+        <div class="tstars">★★★★★</div>
+        <p class="ttext">"Got my teeth whitened here. The result was amazing — so much brighter. Clinic is clean, staff are friendly. Will definitely come back."</p>
+        <p class="tauthor">Jose B.</p>
+        <p class="tloc">La Trinidad, Benguet</p>
+      </div>
+      <div class="tcard r d4">
+        <div class="tstars">★★★★★</div>
+        <p class="ttext">"Brought my kids here for their first check-up. The dentist was so patient with them. Booking online was super easy too. Great experience!"</p>
+        <p class="tauthor">Grace T.</p>
+        <p class="tloc">Baguio City</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-wrap">
+  <div class="cta-bg-grad"></div>
+  <div class="cta-orb co1"></div>
+  <div class="cta-orb co2"></div>
+  <div class="cta-content r">
+    <h2 class="cta-title">Ready for a<br>healthier smile?</h2>
+    <p class="cta-sub">We're accepting new patients. Book your appointment in under 2 minutes — no phone calls needed.</p>
+    <a href="book.html" class="btn-cta">
+      Book an Appointment
+      <svg width="19" height="19" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+      </svg>
+    </a>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-inner">
+    <div class="fbrand">
+      <img src="../logo.jpg" alt="Capstone Dental Clinic" onerror="this.style.display='none'">
+      <p class="fbrand-name">Capstone Dental Clinic</p>
+      <p>Trusted dental care for the whole family. Serving Baguio City and Benguet since 2010.</p>
+    </div>
+    <div class="fcol">
+      <h4>Contact &amp; Hours</h4>
+      <p>📍 Easter School Rd, Baguio City</p>
+      <p>📞 0908 422 3461</p>
+      <p>🕐 Mon–Sat · 9AM–6PM</p>
+    </div>
+    <div class="fcol">
+      <h4>Quick Links</h4>
+      <a href="about.html">About Us</a>
+      <a href="services.html">Services</a>
+      <a href="book.html">Book Appointment</a>
+      <a href="contact.html">Contact</a>
+      <a href="#">Facebook Page</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>&copy; 2026 Capstone Dental Clinic. All rights reserved.</span>
+    <span>Website by <span class="credit">Allen Enriquez</span></span>
+  </div>
+</footer>
+
+<div class="switcher">
+  Viewing: <strong>Style A — Premium Dark + 3D</strong> &nbsp;·&nbsp;
+  <a href="index-style-b.html">Switch to Style B — Clean White</a>
+</div>
+
+<script>
+  // Nav hamburger
+  document.getElementById('nav-toggle').addEventListener('click', () => {
+    document.getElementById('nav-mobile').classList.toggle('open');
+  });
+
+  // Scroll reveal
+  const revEls = document.querySelectorAll('.r');
+  const revObs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('v'); revObs.unobserve(e.target); } });
+  }, { threshold: 0.08, rootMargin: '0px 0px -32px 0px' });
+  revEls.forEach(el => revObs.observe(el));
+
+  // Immediately reveal above-fold elements
+  setTimeout(() => {
+    document.querySelectorAll('.hero .r, .stats-bar .r').forEach(el => el.classList.add('v'));
+  }, 60);
+
+  // Counter animation
+  function runCounter(el) {
+    const target = parseInt(el.dataset.target);
+    const suffix = el.dataset.suffix || '';
+    const dur = 1600;
+    const t0 = performance.now();
+    (function tick(now) {
+      const p = Math.min((now - t0) / dur, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(target * eased).toLocaleString() + suffix;
+      if (p < 1) requestAnimationFrame(tick);
+    })(t0);
+  }
+  const cntObs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { runCounter(e.target); cntObs.unobserve(e.target); } });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('[data-target]').forEach(el => cntObs.observe(el));
+
+  // 3D card tilt on mouse move
+  document.querySelectorAll('[data-tilt]').forEach(card => {
+    const shine = card.querySelector('.scard-shine');
+    card.addEventListener('mousemove', e => {
+      const r = card.getBoundingClientRect();
+      const x = e.clientX - r.left, y = e.clientY - r.top;
+      const cx = r.width / 2, cy = r.height / 2;
+      const rX = ((y - cy) / cy) * -7;
+      const rY = ((x - cx) / cx) * 7;
+      card.style.transform = `perspective(700px) rotateX(${rX}deg) rotateY(${rY}deg) translateZ(6px)`;
+      if (shine) {
+        shine.style.opacity = '1';
+        shine.style.background = `radial-gradient(circle at ${x}px ${y}px, rgba(255,255,255,0.1) 0%, transparent 55%)`;
+      }
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = 'perspective(700px) rotateX(0) rotateY(0) translateZ(0)';
+      if (shine) shine.style.opacity = '0';
+    });
+  });
+</script>
+</body>
+</html>
