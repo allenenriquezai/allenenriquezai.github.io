@@ -1,0 +1,408 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>AI Voice Receptionist - Free Build, Pay Only If You Like It | Allen Enriquez</title>
+<meta name="description" content="I build AI voice receptionists for service businesses. Free build. Pay only if you like the result. Ship in 1-2 weeks. You keep the code." />
+<meta property="og:title" content="AI Voice Receptionist - Free Build, Pay Only If You Like It" />
+<meta property="og:description" content="VAPI, Retell, n8n. Ship in 1-2 weeks. Zero risk." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+:root {
+  --ink:   #0E0D0B;
+  --paper: #EDE3CC;
+  --paper-light: #FAF4E5;
+  --coral: #D97757;
+  --rust:  #B85A3E;
+  --cyan:  #02B3E9;
+  --ink-dim: #4A4842;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Montserrat', system-ui, -apple-system, sans-serif;
+  font-weight: 400;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+.mono { font-family: 'Roboto Mono', ui-monospace, monospace; }
+.coral { color: var(--coral); }
+.wrap { max-width: 920px; margin: 0 auto; padding: 0 24px; }
+.kicker {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  color: var(--coral);
+  margin-bottom: 18px;
+}
+
+/* Hero */
+.hero {
+  padding: 96px 0 64px;
+  border-bottom: 4px solid var(--coral);
+}
+.hero h1 {
+  font-size: clamp(36px, 6vw, 64px);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin-bottom: 24px;
+}
+.hero h1 .pop { color: var(--coral); }
+.hero .sub {
+  font-size: clamp(18px, 2.4vw, 22px);
+  color: var(--ink-dim);
+  max-width: 720px;
+  margin-bottom: 36px;
+}
+.hero-cta-row { display: flex; flex-wrap: wrap; gap: 20px; align-items: center; }
+.btn {
+  display: inline-block;
+  padding: 20px 36px;
+  font-size: 18px;
+  font-weight: 700;
+  text-decoration: none;
+  border-radius: 16px;
+  transition: opacity 0.15s, transform 0.15s;
+}
+.btn:hover { opacity: 0.9; transform: translateY(-1px); }
+.btn.primary { background: var(--coral); color: white; }
+.btn.ghost { background: transparent; color: var(--ink); border: 2px solid var(--ink); }
+
+/* Offer */
+.offer {
+  background: var(--ink);
+  color: white;
+  padding: 80px 0;
+}
+.offer-card {
+  background: #1A1816;
+  border-radius: 24px;
+  padding: 48px;
+}
+.offer h2 {
+  font-size: clamp(28px, 4vw, 42px);
+  font-weight: 900;
+  line-height: 1.15;
+  margin-bottom: 28px;
+}
+.offer h2 .pop { color: var(--coral); }
+.term-list {
+  list-style: none;
+  margin: 28px 0;
+  padding: 0;
+}
+.term-list li {
+  display: flex;
+  gap: 14px;
+  padding: 16px 0;
+  font-size: 18px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.term-list li:last-child { border-bottom: none; }
+.check {
+  color: var(--coral);
+  font-weight: 900;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+.stack-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-top: 28px;
+}
+.stack-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+}
+.stack-card .name {
+  font-family: 'Roboto Mono', monospace;
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--coral);
+  margin-bottom: 4px;
+}
+.stack-card .desc {
+  font-size: 13px;
+  color: rgba(255,255,255,0.6);
+}
+
+/* Portfolio */
+.portfolio {
+  padding: 80px 0;
+  background: var(--paper-light);
+}
+.portfolio h2 {
+  font-size: clamp(28px, 4vw, 38px);
+  font-weight: 900;
+  line-height: 1.15;
+  margin-bottom: 12px;
+}
+.portfolio .sub {
+  color: var(--ink-dim);
+  margin-bottom: 36px;
+  font-size: 17px;
+}
+.proj-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+.proj-card {
+  background: white;
+  border: 1px solid rgba(14,13,11,0.08);
+  border-radius: 16px;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+}
+.proj-card .label {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--coral);
+  margin-bottom: 12px;
+  font-weight: 700;
+}
+.proj-card h3 {
+  font-size: 20px;
+  font-weight: 800;
+  line-height: 1.25;
+  margin-bottom: 8px;
+}
+.proj-card p {
+  font-size: 15px;
+  color: var(--ink-dim);
+  flex: 1;
+}
+.proj-card .tags {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 11px;
+  color: var(--ink-dim);
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(14,13,11,0.08);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* How it works */
+.how {
+  padding: 80px 0;
+}
+.how h2 {
+  font-size: clamp(28px, 4vw, 38px);
+  font-weight: 900;
+  margin-bottom: 12px;
+}
+.how .sub {
+  color: var(--ink-dim);
+  margin-bottom: 36px;
+  font-size: 17px;
+}
+.timeline {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 24px;
+}
+.tl-step {
+  position: relative;
+}
+.tl-step .step-num {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 48px;
+  font-weight: 900;
+  color: var(--coral);
+  line-height: 1;
+  margin-bottom: 12px;
+}
+.tl-step h3 {
+  font-size: 17px;
+  font-weight: 800;
+  margin-bottom: 6px;
+}
+.tl-step p {
+  font-size: 14px;
+  color: var(--ink-dim);
+}
+
+/* Final CTA */
+.final-cta {
+  padding: 80px 0 96px;
+  text-align: center;
+  background: var(--paper-light);
+}
+.final-cta h2 {
+  font-size: clamp(32px, 5vw, 48px);
+  font-weight: 900;
+  line-height: 1.1;
+  margin-bottom: 16px;
+}
+.final-cta .sub {
+  color: var(--ink-dim);
+  font-size: 18px;
+  margin-bottom: 36px;
+}
+.final-cta .btn {
+  font-size: 22px;
+  padding: 24px 48px;
+}
+.final-cta .small {
+  margin-top: 20px;
+  font-family: 'Roboto Mono', monospace;
+  font-size: 12px;
+  color: var(--ink-dim);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* Footer */
+footer {
+  padding: 32px 0;
+  border-top: 1px solid rgba(14,13,11,0.1);
+  text-align: center;
+}
+footer p {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 12px;
+  color: var(--ink-dim);
+}
+footer a { color: var(--coral); text-decoration: none; }
+
+@media (max-width: 640px) {
+  .hero { padding: 56px 0 40px; }
+  .offer-card { padding: 28px; }
+  .term-list li { font-size: 16px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="wrap">
+    <p class="kicker">For service-business operators</p>
+    <h1>I build AI voice receptionists.<br><span class="pop">Free build. Pay only if you like it.</span></h1>
+    <p class="sub">Ship in 1-2 weeks. You keep the code. Zero risk. I take the build cost, you take the testimonial.</p>
+    <div class="hero-cta-row">
+      <a class="btn primary" href="mailto:allenenriquez006@gmail.com?subject=Voice%20agent%20build%20-%20interested">Reply yes to start →</a>
+      <span class="mono" style="color: var(--ink-dim); font-size: 14px;">or DM <a href="https://instagram.com/allenenriquezz" style="color: var(--coral);">@allenenriquezz</a></span>
+    </div>
+  </div>
+</section>
+
+<!-- Offer -->
+<section class="offer">
+  <div class="wrap">
+    <div class="offer-card">
+      <p class="kicker">The terms</p>
+      <h2>Five lines.<br><span class="pop">No fine print.</span></h2>
+
+      <ul class="term-list">
+        <li><span class="check">1.</span><span>I build the entire agent for free.</span></li>
+        <li><span class="check">2.</span><span>You only pay if you like the result and see it working.</span></li>
+        <li><span class="check">3.</span><span>Ship in 1-2 weeks.</span></li>
+        <li><span class="check">4.</span><span>You keep the code.</span></li>
+        <li><span class="check">5.</span><span>Zero risk.</span></li>
+      </ul>
+
+      <p class="kicker" style="margin-top: 36px;">Stack I work with</p>
+      <div class="stack-row">
+        <div class="stack-card"><div class="name">VAPI</div><div class="desc">low-latency voice</div></div>
+        <div class="stack-card"><div class="name">Retell</div><div class="desc">production voice</div></div>
+        <div class="stack-card"><div class="name">n8n</div><div class="desc">workflow + tools</div></div>
+        <div class="stack-card"><div class="name">Claude / OpenAI</div><div class="desc">orchestration</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Portfolio -->
+<section class="portfolio">
+  <div class="wrap">
+    <p class="kicker">Recent work</p>
+    <h2>What I've already shipped.</h2>
+    <p class="sub">Not vaporware. Live systems running for paying operators right now.</p>
+    <div class="proj-grid">
+      <div class="proj-card">
+        <div class="label">24/7 AI Front Desk</div>
+        <h3>FB Messenger receptionist</h3>
+        <p>ManyChat + Railway + Claude. Handles after-hours patient enquiries for an aesthetic clinic. Auto-books, escalates urgents, never sleeps.</p>
+        <div class="tags">ManyChat · Railway · Claude</div>
+      </div>
+      <div class="proj-card">
+        <div class="label">EPS sales automation</div>
+        <h3>$60-100k/mo pipeline</h3>
+        <p>AI-drafted proposals, CRM sync, follow-up triggers for an AU construction firm. Quote time dropped 30-60 min → 5 min per estimate.</p>
+        <div class="tags">n8n · Pipedrive · Claude</div>
+      </div>
+      <div class="proj-card">
+        <div class="label">Stonework lead engine</div>
+        <h3>Gmail labeler + SC portal</h3>
+        <p>Auto-classifies inbound emails by intent, routes to sales portal. Lead-response time dropped from 12 hours to under 5 minutes.</p>
+        <div class="tags">Gmail API · Claude · Custom portal</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- How it works -->
+<section class="how">
+  <div class="wrap">
+    <p class="kicker">How it actually works</p>
+    <h2>Four steps, no surprises.</h2>
+    <p class="sub">From first reply to live agent in 14 days max.</p>
+    <div class="timeline">
+      <div class="tl-step">
+        <div class="step-num">01</div>
+        <h3>15-min Zoom</h3>
+        <p>You walk me through what the agent needs to handle. I confirm scope on screen-share.</p>
+      </div>
+      <div class="tl-step">
+        <div class="step-num">02</div>
+        <h3>I build</h3>
+        <p>Days 1-7. I do the work, no daily standups, no scope creep. Demo at day 5 to course-correct.</p>
+      </div>
+      <div class="tl-step">
+        <div class="step-num">03</div>
+        <h3>You test</h3>
+        <p>Days 8-12. You poke at it, break it, give me 1 round of fixes. Final agent goes live.</p>
+      </div>
+      <div class="tl-step">
+        <div class="step-num">04</div>
+        <h3>You decide</h3>
+        <p>Like it? Pay what feels fair (or keep it for free + drop a testimonial). Don't like it? Keep the code anyway, walk away.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Final CTA -->
+<section class="final-cta">
+  <div class="wrap">
+    <h2>Want me to build yours?</h2>
+    <p class="sub">Reply with what you want the agent to handle. I'll send back a 5-line scope, we can be on Zoom this week.</p>
+    <a class="btn primary" href="mailto:allenenriquez006@gmail.com?subject=Voice%20agent%20build%20-%20interested">Reply to start →</a>
+    <p class="small">1-2 week ship · You keep the code · Zero upfront</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>Allen Enriquez · AI agent builds for service businesses · <a href="https://allenenriquezai.github.io">allenenriquezai.github.io</a></p>
+  </div>
+</footer>
+
+</body>
+</html>
